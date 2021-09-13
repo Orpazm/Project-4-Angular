@@ -1,0 +1,114 @@
+create database project4_orpaz;
+use project4_orpaz;
+
+create table users (
+    name varchar(255),
+    surname varchar(255),
+    email varchar(255),
+    id varchar(9),
+    password text,
+    city varchar(100),
+    street varchar(100),
+    role varchar (255) default "user",
+    primary key (id)
+);
+
+create table category (
+id int auto_increment,
+category_name varchar(255),
+primary key (id)
+);
+
+create table product (
+id int auto_increment,
+product_name varchar(255),
+category_id int not null,
+price int not null,
+img text not null,
+primary key (id),
+foreign key (category_id) references category (id) ON DELETE CASCADE
+);
+
+create table carts (
+id int auto_increment,
+user_id varchar(9),
+date_created date default now(),
+status varchar(255) default "open",
+primary key (id),
+foreign key (user_id) references users (id) ON DELETE CASCADE
+);
+
+create table cartItems (
+id int auto_increment,
+product_id int,
+quantity int,
+total_price int,
+cart_id int,
+primary key (id),
+foreign key (product_id) references product (id) ON DELETE CASCADE,
+foreign key (cart_id) references carts (id) ON DELETE CASCADE
+);
+
+create table orders (
+id int auto_increment,
+user_id varchar(9),
+cart_id int,
+final_price int,
+shipping_city varchar(255),
+shipping_street varchar(255),
+shipping_date date not null,
+order_date date default now(),
+last_card_digits int not null,
+primary key (id),
+foreign key (user_id) references users (id) ON DELETE CASCADE,
+foreign key (cart_id) references carts (id) ON DELETE CASCADE
+);
+
+INSERT INTO users (id,email,password) 
+VALUES ("123456789","jo@example.com","$2b$10$5lvgB70Z7L6LfxvEX2R7E.Bx5R4wXdKwFMfiKm7EXhRvl7v4OSX3W"),
+("987654321","jojo@example.com","$2b$10$5lvgB70Z7L6LfxvEX2R7E.Bx5R4wXdKwFMfiKm7EXhRvl7v4OSX3W");
+
+UPDATE users set city="Rehovot", street="Hertzl 3",
+name="Jo", surname="Joniel" WHERE id="123456789";
+
+UPDATE users SET role="admin" WHERE id="987654321";
+UPDATE users SET name = 'jojo' WHERE id = '987654321';
+
+INSERT INTO carts (user_id) VALUES ("123456789");
+
+insert into category (category_name) values ("Fruits and Vegetables"), ("Fish and Meat"),
+("Dairy products"), ("Snacks"), ("Pharm products"), ("Detergents");
+
+  insert into product (product_name,category_id,price,img) values 
+  ("Tomatoes",1,14.90,"https://www.almanac.com/sites/default/files/image_nodes/tomatoes_helios4eos_gettyimages-edit.jpeg"),
+  ("Apples",1,6.20,"https://static.libertyprim.com/files/familles/pomme-large.jpg?1569271834"),
+  ("Cucumbers", 1, 7.90, "https://static.libertyprim.com/files/varietes/concombre-hollandais-large.jpg?1569524167"),("Kiwies",1,4.30,"http://frutatua.com/wp-content/uploads/2018/01/kiwi.jpg"),
+  ("Raspberry",1,2.80,"https://www.petramora.com/blog/wp-content/uploads/2019/10/Bandeja-de-frambuesas-ecologicas.jpg"),
+  ("Denis",2,25,"https://images.yaoota.com/p2auZ8Y7gWLfEYoZh2AmOhcZIW4=/trim/yaootaweb-production-sa/media/crawledproductimages/ee38789db3f67f1f78940f66b7256cf39c84769d.jpg"),
+  ("Sole fish", 2, 13.90, "https://www.wingofstmawes.co.uk/wp-content/uploads/2016/10/dove_sole-wing-fish.jpg"),
+  ("Whole milk 3%",3,1.70,"https://www.tnuva.co.il/uploads/f_606ee43fa87cf_1617880127.jpg"),
+  ("Feta cheese",3,3.40,"https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202001/17/00118382003178____2__600x600.jpg"),
+  ("Mozarella cheese",3,5.90,"https://www.ocado.com/productImages/282/282437011_0_640x640.jpg?identifier=d864734b3a7dd9ca11b38f070b84f825"),
+  ("Shoko besakit", 3,4.50, "https://64.media.tumblr.com/ebf6ed247e38c3ab0c8ee765a8b81b4d/tumblr_mv0kklxBuA1s4lolfo1_640.jpg"),
+  ("Starbucks cold coffee latte 220ml",3,0.50,"https://assets.sainsburys-groceries.co.uk/gol/7260789/1/640x640.jpg"),
+  ("Bamba 10-pack",4,6.20,"https://www.amihaimcandies.com/wp-content/uploads/2020/07/7290105693341.jpg"),
+  ("Gluten free pretzzels",4,5,"https://static.carrefour.es/hd_510x_/img_pim_food/815225_00_1.jpg"),
+  ("Dubonim snack",4,3.30,"https://osemcat.signature-it.com/images/Fittings/osem-hq/Upload_Pictures/Prod_Pic/6901268/Custom/6901268_7290000066264_L.png"),
+  ("Head & shoulders shampoo",5,7.90,"https://m.media-amazon.com/images/I/71FMlrA8TiL._SL1500_.jpg"),
+  ("Elvive hair mask",5,4.80,"https://static.beautytocare.com/media/catalog/product/cache/global/image/650x650/85e4522595efc69f496374d01ef2bf13/l/-/l-oreal-paris-elvive-total-repair-5-hair-mask-300ml.jpg"),
+  ("Rose face cream",5,24.80,"https://www.sephora.es/dw/image/v2/BCVW_PRD/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw1f8a822d/images/hi-res/SKU/SKU_4/350073_swatch.jpg?sw=585&sh=585&sm=fit"),
+  ("Kiko makeup",5,21.90,"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kikocosmetics.com%2F&psig=AOvVaw2C4H2kwGCVnQhEQYwJdjK8&ust=1627820542193000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLDOupumjfICFQAAAAAdAAAAABAL"),
+  ("Ariel capsules 3 in 1",6,29.30,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO2mDDU1OtSmTBfikH2G5dVXggn6B0PANS4w&usqp=CAU"),
+  ("Badin laundry softener",6,17.60,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR71PtwAjBm2iW9_2r70t6dvrL4FcMS9MnJlw&usqp=CAU"),
+  ("Floor detergent",6,8.80,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlaqbVUALL8G3ZPBzX6TnwfyrNtqEFt-oGmQ&usqp=CAU");
+
+
+
+
+
+
+//only for my use- don't copy that// 
+<!--insert into orders (user_id, cart_id, final_price, shipping_city, shipping_street, shipping_date, order_date, last_card_digits)
+values ("333333333",24,55,"tel aviv", "blahest street", "2021-08-22T00:00:00.0Z", "2021-08-17T00:00:00.0Z", 333),
+("200000000",25,133,"rishon", "blahblah street", "2021-08-22T00:00:00.0Z", "2021-08-17T00:00:00.0Z", 000),
+("200000000",25,133,"rishon", "blahblah street", "2021-08-22T00:00:00.0Z", "2021-08-17T00:00:00.0Z", 000)-->

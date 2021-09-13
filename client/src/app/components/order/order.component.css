@@ -1,0 +1,7 @@
+main{
+    display: flex;
+}
+
+main > div {
+    flex: 50%;
+}

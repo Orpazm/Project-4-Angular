@@ -1,0 +1,132 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  #search{
+      margin-left: 50px;
+      padding: 0%;
+  }
+
+  main{
+      height: 83vh;
+      width: 100vw;
+  }
+
+  CSS
+  .example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  #cont{
+    height: 100%;
+  }
+
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-image: url(bkg2.jpg);
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+  }
+  
+  .example-sidenav {
+    padding: 0px;
+    background-color: rgba(0, 128, 0, 0);
+    width: 20%;
+    height: 100%;
+  }
+
+  #checkout{
+      background-color: rgb(255, 255, 82);
+      margin-left: 20%;
+  }
+
+  #tabGroup{
+    display: flex;
+    width: 80%;
+    height: 100%;
+  }
+
+  .example-card {
+    max-width: 100px;
+    margin: 2%;
+  }
+
+  #sideImg{
+    height: 70px;
+    width: 70px;
+    margin-right: 1%;
+    border-radius: 50%;
+    border: 2px solid bisque;
+  }
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-label { 
+  padding:50px; 
+  position: absolute;
+}
+
+mat-button{
+  position: absolute;
+  left:    0;
+  bottom:   0;
+}
+
+#img{
+  width: 132px;
+  height: 100px;
+}
+
+#clear{
+  height: 30px;
+  width: 10px;
+}
+
+#x{
+  font-size: 16px;
+}
+
+#x:hover{
+  color: red;
+}
+
+#deleteAll:hover{
+cursor: pointer;
+color: red;
+}
+
+#total{
+  margin-left: 20%;
+}
+
+#addProd{
+  border-radius: 100px ;
+  background-color: rgba(61, 250, 234, 0.836);
+  border: 2px solid black;
+  padding: 5px 15px;
+  text-decoration: none;
+  margin: 20px;
+  position: relative;
+  display: inline-block;
+  box-shadow: 3px 5px 5px ;
+}
+
+#manageCart{
+  display: flex;
+  justify-content: center;
+}
+
+#addProd{
+  display: flex;
+  justify-content: center;
+}
+

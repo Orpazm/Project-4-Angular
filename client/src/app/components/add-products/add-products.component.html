@@ -1,0 +1,32 @@
+<form [formGroup]="myForm" >
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter product name</mat-label>
+          <input matInput formControlName="product_name" required >
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Enter category id</mat-label>
+            <input matInput formControlName="category_id" required >
+        </mat-form-field> -->
+        <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select name="category" formControlName="category_id" required>
+              <mat-option *ngFor="let category of _data.categoryArr " [value]="category.id" >
+                {{category.category_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter price in EUR</mat-label>
+            <input matInput formControlName="price" required >
+        </mat-form-field>
+        <mat-form-field appearance="fill" id="img" >
+            <mat-label>Enter img</mat-label>
+            <input matInput  placeholder="Enter product img" formControlName="img" required >
+        </mat-form-field>
+        <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+      </mat-card-content>
+        <button mat-button (click)="_data.addItem(myForm.value)">Save</button>
+    </mat-card>
+</form> 

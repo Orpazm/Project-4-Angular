@@ -1,0 +1,10 @@
+<mat-card class="card" >
+    <h2>Your purchase was made successfully!</h2>
+    <h3> 
+        <a href='http://localhost:1000/invoices/{{user_id}}.pdf' download target="_blank">Click here</a>
+         to download the receipt 
+    </h3>
+  <mat-dialog-actions  id="buttons"> 
+    <button class="mat-raised-button mat-primary" id="confirm" (click)="close() ; this._r.navigateByUrl('/main')">Confirm</button>
+  </mat-dialog-actions>
+</mat-card>

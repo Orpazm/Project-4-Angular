@@ -1,0 +1,23 @@
+<mat-card class="example-card" id="panelc">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <h2>
+        There were {{_data.orderCount}} orders in our site until this moment!
+      </h2>
+      <h2>
+        There are {{_data.productsCount}} products available in our site 
+      </h2>
+      <h2 id="yellow" *ngIf="_data.isLoggedIn() && _data.cartsArr.length == 1 && _data.final_price == null">
+        Welcome to your first purchase! 
+      </h2>
+      <h2 id="yellow" *ngIf="_data.isLoggedIn() && _data.cartsArr.length > 1 && _data.final_price == null ">
+        Welcome back! Your last purchase was on day {{_data.order_date |date: 'dd/MM/yyyy'}}
+      </h2>
+      <h2 id="yellow" *ngIf="_data.isLoggedIn() && _data.cartsArr.length > 0  && _data.final_price !== null " >
+        Hi {{_data.name}}, You have an open cart from date {{_data.cartItemArr[0].date_created | date: 'dd/MM/yyyy'}} with sum of {{_data.final_price}}€
+      </h2>
+    </mat-card-content>
+</mat-card>

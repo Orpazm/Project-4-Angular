@@ -1,0 +1,45 @@
+<main>
+    <form [formGroup]="myForm"  id="register" >
+      <mat-card class="example-card" id="login">
+        <mat-card-header>
+            <h3>Shipping details</h3>    
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select name="city" formControlName="shipping_city" required>
+              <mat-option *ngFor="let city of cities" [value]="city.value" (dblclick)="getCity()" >
+                {{city.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field appearance="fill" id="street" >
+            <mat-label>Street</mat-label>
+            <input matInput placeholder="Street" formControlName="shipping_street"
+             (dblclick)="getStreet()" [value]="myForm.value.shipping_street" required >
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" 
+             [matDatepicker]="picker" formControlName="shipping_date" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> 
+
+          <h3>Payment</h3>
+          <mat-form-field appearance="fill" id="creditCard" >
+            <mat-label>Credit card number</mat-label>
+            <input matInput placeholder="Please enter 14-16 digits" formControlName="last_card_digits" required >
+          </mat-form-field>
+      
+          <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+    
+        </mat-card-content>
+    
+        <button mat-button type="button" [disabled]="!this.myForm.valid" 
+        (click)="_data.makeOrder(myForm.value) ; openDialogOrder() " >Confirm payment</button>
+      </mat-card>
+    </form> 
+</main>

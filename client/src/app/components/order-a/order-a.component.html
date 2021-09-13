@@ -1,0 +1,22 @@
+<mat-card class="example-card" >
+
+    <mat-card-header>
+        <form class="example-form"  >
+          <mat-form-field class="example-full-width" [formGroup]="myForm"   >
+            <mat-label id="search" >Search</mat-label>
+            <input matInput id="inputSearch" formControlName="search" [(ngModel)]="myForm.value.search">
+          </mat-form-field>
+        </form>
+        <h1>My cart</h1>
+        <mat-icon matTooltip="Go back to shopping" id="home_icon" (click)="this._r.navigateByUrl('/main')"> local_mall</mat-icon>
+    </mat-card-header>
+
+    <div class="sidebar" >
+        <mat-card-content *ngFor="let item of _data.cartItemArr" >
+          <img mat-card-image id="sideImg" src="{{item.img}}" alt="Photo of {{item.product_name}}">
+            <h3> {{item.quantity}} <span [innerHTML]="item.product_name| highllight : myForm.value.search"> {{item.product_name}} </span> -<br>{{item.total_price}}€ </h3> 
+        </mat-card-content>
+        <h3 id="total">Total to pay: {{_data.final_price}} € </h3>
+    </div>
+
+</mat-card>

@@ -1,0 +1,8 @@
+<mat-card class="card" >
+    <h2>Are you sure you want to delete all cart items?</h2>
+  <mat-dialog-actions id="buttons">
+    <button class="mat-raised-button mat-primary" id="delete" (click)="_data.delAllCartItems(_data.cartId) ;
+     _data.getCartItems(_data.userID) ; _data.getFinalPrice(_data.userID) ; close()">Delete All</button>
+    <button class="mat-raised-button mat-primary" id="back" (click)="close()" >Go back to shopping</button>
+  </mat-dialog-actions>
+</mat-card>

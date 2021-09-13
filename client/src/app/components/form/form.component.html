@@ -1,0 +1,31 @@
+<form [formGroup]="myForm" >
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Img</mat-label>
+            <input matInput placeholder="Enter product img" formControlName="img" required >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter product name</mat-label>
+            <input matInput formControlName="product_name"  >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter category id</mat-label>
+            <input matInput formControlName="category_id"  >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter price in EUR</mat-label>
+            <input matInput formControlName="price"  >
+        </mat-form-field>
+        <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+      </mat-card-content>
+      <button mat-button (click)="_data.changeItem(myForm.value) ; _data.getProducts(myForm.value.category_id) ;
+       this._data.isEditClicked = false">Save
+      </button>
+      <button mat-button matTooltip="Exit edit without saving changes"
+                     *ngIf="_data.role == 'admin' && _data.isEditClicked == true" 
+                     (click)="CloseEdit()">
+                      <mat-icon>settings_backup_restore</mat-icon>
+      </button>
+    </mat-card>
+</form> 

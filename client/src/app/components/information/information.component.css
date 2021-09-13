@@ -1,0 +1,9 @@
+#panelc{
+    width: 100%;
+    background-color: rgba(85, 52, 230, 0.082);
+    height: 83vh;
+}
+
+#yellow{
+    color: rgb(180, 180, 0);
+}

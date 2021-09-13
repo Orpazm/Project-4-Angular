@@ -1,0 +1,45 @@
+<main>
+    <form [formGroup]="myForm"  id="register" >
+      <mat-card class="example-card">
+        <mat-card-content id="login_content" *ngIf="!_data.isLoggedIn()">
+          <mat-form-field appearance="fill" id="id" >
+            <mat-label>Enter your ID</mat-label>
+            <input matInput  placeholder="9 digits" formControlName="id" required  >
+          </mat-form-field>
+          <mat-form-field appearance="fill" id="email" >
+            <mat-label>Enter your email</mat-label>
+            <input matInput  placeholder="example@example.com" formControlName="email" required >
+            <mat-error *ngIf="myForm.controls.email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"  >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+             [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Confirm password</mat-label>
+            <input matInput formControlName="confirm_password" pattern="{{ myForm.controls.password.value}}"
+             [type]="hide ? 'password' : 'text'"  >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+             [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+    
+        </mat-card-content>
+    
+        <button mat-button [disabled]="myForm.controls.password.value !== myForm.controls.confirm_password.value"
+         (click)="_data.registerA(myForm.value.id, myForm.value.email, myForm.value.password)" > 
+              <mat-icon>forward</mat-icon>
+        </button>
+          <!-- <p>{{myForm.value | json}}</p> -->
+          <p>Already have an account? <a href="/login" >Login</a> </p>
+      </mat-card>
+    </form>
+</main>
+

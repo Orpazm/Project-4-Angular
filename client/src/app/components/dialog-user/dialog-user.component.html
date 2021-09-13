@@ -1,0 +1,12 @@
+<mat-dialog-content [formGroup]="form" >
+  <mat-form-field appearance="fill"  id="quantity">
+      <mat-label>Enter item quantity</mat-label>
+      <input matInput placeholder="Enter quantity" formControlName="quantity" type="number" min="1">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-card class="card" >
+  <mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" (click)="_data.addToCart(form.value) ; _data.getFinalPrice(_data.userID) ; close()">Add to cart</button>
+  </mat-dialog-actions>
+</mat-card>

@@ -1,0 +1,36 @@
+<main>
+    <form [formGroup]="myForm"  id="register" >
+      <mat-card class="example-card">
+        <mat-card-content>
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select name="city" formControlName="city" required>
+              <mat-option *ngFor="let city of cities" [value]="city.value" >
+                {{city.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" id="street" >
+                <mat-label>Street</mat-label>
+                <input matInput  placeholder="Street" formControlName="street" required >
+          </mat-form-field>
+          <mat-form-field appearance="fill" id="name" >
+            <mat-label>Name</mat-label>
+            <input matInput  placeholder="Name" formControlName="name" required >
+          </mat-form-field>
+          <mat-form-field appearance="fill" id="surname" >
+            <mat-label>Surname</mat-label>
+            <input matInput  placeholder="Surname" formControlName="surname" required >
+          </mat-form-field>
+      
+          <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+    
+        </mat-card-content>
+    
+          <button mat-button (click)="_data.registerB(myForm.value.id, myForm.value.city,
+          myForm.value.street, myForm.value.name, myForm.value.surname)" >Register</button>
+          <!-- <p  >{{myForm.value | json}}</p> -->
+          <p>Already have an account? <a href="/login">Login</a> </p>
+      </mat-card>
+    </form>
+</main>

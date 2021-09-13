@@ -1,0 +1,13 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+#search{
+      margin-left: 50px;
+      padding: 0%;
+}
+
+#logo{
+    height: 50px;
+    width: 50px;
+}

@@ -1,0 +1,70 @@
+<app-header></app-header>
+<main>
+   <!-- cart side nav  -->
+    <mat-drawer-container class="example-container" id="cont" >
+      <mat-drawer #drawer class="example-sidenav" mode="side" opened  >
+        <h1 id="manageCart">{{_data.role == "admin" ? "Manage products":"My cart"}}</h1>
+        <div class="sidebar" *ngIf="_data.role == 'user'">
+          <mat-card-header *ngFor="let item of _data.cartItemArr" >
+            <button id="clear" mat-button>
+              <mat-icon id="x" (click)="_data.delCartItem(item.id) ; _data.getCartItems(_data.userID) ;
+               _data.getFinalPrice(_data.userID)">clear</mat-icon>
+            </button>
+            <img mat-card-image id="sideImg" src="{{item.img}}" alt="Photo of {{item.product_name}}">
+              <h3> {{item.quantity}} {{item.product_name}}-<br>{{item.total_price}}€ </h3> 
+          </mat-card-header>
+          <mat-icon *ngIf="_data.final_price!== null" id="deleteAll" matTooltip="Delete all products from cart" 
+                    (click)="openDialogAlert()"
+                    aria-label="Icon that displays a tooltip when focused or hovered over"> 
+               delete_forever
+          </mat-icon>
+          <h3 id="total" *ngIf="_data.final_price!== null" >Total to pay: {{_data.final_price}} € </h3>
+          <button id="checkout" *ngIf="_data.role == 'user' && _data.final_price!== null "
+           mat-raised-button (click)="this._r.navigateByUrl('/order')">
+              Go to checkout 
+            </button>
+        </div>
+        <button id="addProd" *ngIf="_data.role == 'admin'" (click)="toggleAddForm()" mat-raised-button >
+          <mat-icon>add</mat-icon>Add products 
+        </button>
+        
+        <app-form *ngIf="this._data.isEditClicked == true"></app-form>
+        <app-add-products *ngIf="this._data.addProdClicked == true && this._data.isEditClicked == false" > </app-add-products>
+      </mat-drawer>
+
+      <!-- products container -->
+      <div class="example-sidenav-content">
+        <mat-tab-group id="tabGroup" (focusChange)="getTab($event)">
+            <mat-tab *ngFor="let category of _data.categoryArr ; let i = index" label={{category.category_name}}>
+              <ng-template mat-tab-label id="tabLabel" >
+                <span  >{{category.category_name}}</span>
+              </ng-template>
+              <div class="container">
+                <mat-card class="example-card" *ngFor="let prod of _data.productsArr ; let i = index " >
+                  <img mat-card-image id="img" src="{{prod.img}}" alt="Photo of {{prod.product_name}}">
+                  <mat-card-content id="cardContent">
+                    <p>
+                      {{prod.product_name}}-{{prod.price}}€
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button *ngIf="_data.role == 'user'" (click)="openDialog(i) ; setCurrProd(prod)">
+                      <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                    <button mat-button matTooltip="Edit" 
+                     *ngIf="_data.role == 'admin' && _data.isEditClicked == false"
+                     (click)=" _data.addProdClicked = false ; OpenEdit(i) ; setCurrProd(prod) ">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </mat-tab>
+            <mat-divider></mat-divider>
+          </mat-tab-group>
+        <button type="button" mat-button (click)="drawer.toggle() ; isToggled = !isToggled">
+          {{isToggled == false? 'Close sidebar' : 'Open sidebar'}}
+        </button>
+      </div>
+    </mat-drawer-container>
+</main>

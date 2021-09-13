@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <span > Hello {{_data.isLoggedIn()? _data.name : 'Guest'}} </span>
+  <form class="example-form" [formGroup]="myForm" >
+      <mat-form-field class="example-full-width"  id="search" appearance="fill" *ngIf="this._r.url === '/main'" >
+          <mat-label >Search</mat-label>
+          <input matInput formControlName="prod" placeholder="">
+      </mat-form-field>
+      <button type="button" mat-icon-button class="example-icon search-icon" *ngIf="this._r.url === '/main'"
+        aria-label="Example icon-button with search icon" (click)="_data.getSearchedProducts(myForm.value.prod)" >
+            <mat-icon>search</mat-icon>
+      </button>
+  </form>
+  <span class="example-spacer"></span>
+  <span class="example-spacer"></span> 
+  <img id="logo" src="http://localhost:1000/images/logo.jpg" alt="store logo">
+      <button mat-icon-button *ngIf="_data.isLoggedIn()" class="example-icon exit-to-app-icon" 
+       aria-label="Example icon-button with exit icon" (click)=" delToken() ; this._r.navigateByUrl('/login')">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+</mat-toolbar> 
+

@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<main>
+  <form [formGroup]="myForm" (ngSubmit)="_data.login(myForm.value.email, myForm.value.password)" id="logina" >
+    <mat-card class="example-card" id="login">
+      <mat-card-header id="login_header">
+        <a mat-flat-button id="login_header" *ngIf="_data.isLoggedIn()" (click)="this._r.navigateByUrl('/main')" color="accent" 
+         target="_blank">{{_data.final_price == null && _data.role == "user"? "start":"resume"}} shopping</a>
+      </mat-card-header>
+
+      <mat-card-content id="login_content" *ngIf="!_data.isLoggedIn()">
+        <mat-form-field appearance="fill" id="email" >
+            <mat-label>Enter your email</mat-label>
+            <input matInput  placeholder="example@example.com" formControlName="email" required >
+            <mat-error *ngIf="myForm.controls.email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"  >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <span *ngIf="_data.errMsg">{{_data.errMsg}} </span>
+      </mat-card-content>
+
+      <button mat-button (click)="_data.login(myForm.value.email, myForm.value.password)"
+        *ngIf="!_data.isLoggedIn()" >Login
+      </button>
+      <p *ngIf="!_data.isLoggedIn()" >Doesn't have an account yet? <a href="/register" >Register</a> </p>
+    </mat-card>
+  </form>
+
+<app-about></app-about>
+
+<app-information></app-information>
+
+</main>

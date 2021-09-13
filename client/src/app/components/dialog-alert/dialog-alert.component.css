@@ -1,0 +1,16 @@
+h2{
+    color: red;
+}
+
+#buttons{
+    display: flex;
+    justify-content: space-around;
+}
+
+#delete:hover{
+background-color: red;
+}
+
+#back:hover{
+    background-color: rgb(61, 201, 61);
+}
